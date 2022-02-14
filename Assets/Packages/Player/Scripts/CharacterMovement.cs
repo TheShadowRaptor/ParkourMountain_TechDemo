@@ -33,10 +33,10 @@ public class CharacterMovement : MonoBehaviour
 
     private bool isGrounded;
     private bool canWallJump;
-    private bool canVault;
+    /*private bool canVault;*/
 
     private bool oneTimeWallJump;
-    private bool oneTimeVaultJump;
+    /*private bool oneTimeVaultJump;*/
 
     // Start is called before the first frame update
     void Start()
@@ -76,7 +76,7 @@ public class CharacterMovement : MonoBehaviour
         {
             velocity.y = -2f;
             oneTimeWallJump = true;
-            oneTimeVaultJump = true;
+            /*oneTimeVaultJump = true;*/
         }
 
         //Checks if player can walljump
@@ -88,7 +88,7 @@ public class CharacterMovement : MonoBehaviour
         }
 
         //Checks if player is near a vault
-        canVault = Physics.CheckSphere(vaultCheck.position, vaultDistance, vaultMask);
+        /*canVault = Physics.CheckSphere(vaultCheck.position, vaultDistance, vaultMask);*/
 
         //Jump Input
         if (isGrounded && Input.GetButtonDown("Jump"))
@@ -103,12 +103,12 @@ public class CharacterMovement : MonoBehaviour
             oneTimeWallJump = false;
         }
 
-        //Vaulting
-        /*if (canVault && Input.GetButtonDown("Jump") && oneTimeVaultJump == true)
+       /* //Vaulting
+        *//*if (canVault && Input.GetButtonDown("Jump") && oneTimeVaultJump == true)
         {
             //can vault
             //speed = speed + 100;
-            oneTimeVaultJump = false;*/
-        }        
+            oneTimeVaultJump = false;*//*
+        }     */   
     }    
 }
