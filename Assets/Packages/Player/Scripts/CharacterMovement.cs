@@ -104,11 +104,11 @@ public class CharacterMovement : MonoBehaviour
         }
 
         //Vaulting
-        if (canVault && Input.GetButtonDown("Jump") && oneTimeVaultJump == true)
+        /*if (canVault && Input.GetButtonDown("Jump") && oneTimeVaultJump == true)
         {
             //can vault
             //speed = speed + 100;
-            oneTimeVaultJump = false;
+            oneTimeVaultJump = false;*/
         }        
     }    
 }
