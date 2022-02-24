@@ -5,7 +5,10 @@ public class PickUp : MonoBehaviour
     // initilize destination
     private Transform theDest;
 
-    public GameObject ball;
+    public GameObject throwAble;
+    public GameObject Camera;
+
+    public float force;
 
     //pickUp checking
     public float pickUpDistance = 1f;
@@ -40,20 +43,19 @@ public class PickUp : MonoBehaviour
         if (Input.GetMouseButtonDown(0) && canPickUp == true)
         {
             Debug.Log("pickup");
-            ball.transform.position = theDest.position;
-            ball.transform.parent = theDest;
+            throwAble.transform.position = theDest.position;
+            throwAble.transform.parent = theDest;
             isPickedUp = true;
-            ball.GetComponent<Rigidbody>().isKinematic = true;
+            throwAble.GetComponent<Rigidbody>().isKinematic = true;
         }
 
         else if (Input.GetMouseButtonDown(0) && isPickedUp == true)
         {
             Debug.Log("pickup");
-            ball.transform.parent = null;
+            throwAble.transform.parent = null;
             isPickedUp = false;
-            ball.GetComponent<Rigidbody>().isKinematic = false;
-            ball.GetComponent<Rigidbody>().AddForce(Vector3.forward);
-
+            throwAble.GetComponent<Rigidbody>().isKinematic = false;
+            throwAble.GetComponent<Rigidbody>().AddForce(Camera.transform.forward * force, ForceMode.Impulse);
         }
     }
 }
