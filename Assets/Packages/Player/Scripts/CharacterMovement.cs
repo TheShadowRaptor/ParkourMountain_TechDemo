@@ -10,10 +10,10 @@ public class CharacterMovement : MonoBehaviour
     public float speed = 12f;
     public float gravity = -9.81f;
 
-    Vector3 velocity;
+    public Vector3 velocity;
 
     //Jumping
-
+    public float wallJumpHeight = 1;
     public float jumpHeight = 3;
 
     //ground checking
@@ -24,7 +24,8 @@ public class CharacterMovement : MonoBehaviour
     //wall checking
     public Transform wallCheck;
     public float wallDistance = 0.4f;
-    public LayerMask wallMask;
+    public LayerMask wallOneMask;
+    public LayerMask wallTwoMask;
 
     //vault checking
     public Transform vaultCheck;
@@ -32,10 +33,12 @@ public class CharacterMovement : MonoBehaviour
     public LayerMask vaultMask;
 
     private bool isGrounded;
-    private bool canWallJump;
+    private bool canWallJumpOne;
+    private bool canWallJumpTwo;
     /*private bool canVault;*/
 
-    private bool oneTimeWallJump;
+    private bool oneTimeWallJumpOne;
+    private bool oneTimeWallJumpTwo;
     /*private bool oneTimeVaultJump;*/
 
     // Start is called before the first frame update
@@ -75,40 +78,48 @@ public class CharacterMovement : MonoBehaviour
         if (isGrounded && velocity.y < 0)
         {
             velocity.y = -2f;
-            oneTimeWallJump = true;
+            oneTimeWallJumpOne = true;
+            oneTimeWallJumpTwo = true;
             /*oneTimeVaultJump = true;*/
         }
 
-        //Checks if player can walljump
-        canWallJump = Physics.CheckSphere(wallCheck.position, wallDistance, wallMask);
+        // Rest wall jump
+        if (canWallJumpTwo) oneTimeWallJumpOne = true;
+        if (canWallJumpOne) oneTimeWallJumpTwo = true;
 
-        if (canWallJump && velocity.x < 0)
-        {
-            velocity.x = 0;
-        }
+        //Checks if player can walljump
+        canWallJumpOne = Physics.CheckSphere(wallCheck.position, wallDistance, wallOneMask);
+        canWallJumpTwo = Physics.CheckSphere(wallCheck.position, wallDistance, wallTwoMask);
+
+        if (canWallJumpOne && velocity.x < 0) velocity.x = 0;
+
+        if (canWallJumpTwo && velocity.x < 0) velocity.x = 0;
 
         //Checks if player is near a vault
         /*canVault = Physics.CheckSphere(vaultCheck.position, vaultDistance, vaultMask);*/
 
         //Jump Input
-        if (isGrounded && Input.GetButtonDown("Jump"))
-        {
-            velocity.y = Mathf.Sqrt(jumpHeight * -1f * gravity);
-        }
+        if (isGrounded && Input.GetButtonDown("Jump")) velocity.y = Mathf.Sqrt(jumpHeight * -1f * gravity);      
 
         //Wall Jump
-        if (canWallJump && Input.GetButtonDown("Jump") && oneTimeWallJump == true)
+        if (canWallJumpOne && Input.GetButtonDown("Jump") && oneTimeWallJumpOne == true)
         {
-            velocity.y = Mathf.Sqrt(jumpHeight * -1f * gravity);
-            oneTimeWallJump = false;
+            velocity.y = Mathf.Sqrt(wallJumpHeight * -1f * gravity);
+            oneTimeWallJumpOne = false;
         }
 
-       /* //Vaulting
-        *//*if (canVault && Input.GetButtonDown("Jump") && oneTimeVaultJump == true)
+        if (canWallJumpTwo && Input.GetButtonDown("Jump") && oneTimeWallJumpTwo == true)
         {
-            //can vault
-            //speed = speed + 100;
-            oneTimeVaultJump = false;*//*
-        }     */   
+            velocity.y = Mathf.Sqrt(wallJumpHeight * -1f * gravity);
+            oneTimeWallJumpTwo = false;
+        }
+
+        /* //Vaulting
+         *//*if (canVault && Input.GetButtonDown("Jump") && oneTimeVaultJump == true)
+         {
+             //can vault
+             //speed = speed + 100;
+             oneTimeVaultJump = false;*//*
+         }     */
     }    
 }

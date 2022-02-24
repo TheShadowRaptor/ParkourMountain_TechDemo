@@ -4,9 +4,11 @@ public class PickUp : MonoBehaviour
 {
     // initilize destination
     private Transform theDest;
+    private float playerVelocity;
 
     public GameObject throwAble;
     public GameObject Camera;
+    public GameObject player;
 
     public float force;
 
@@ -20,7 +22,7 @@ public class PickUp : MonoBehaviour
     // Start is called before the first frame update
     void Start()
     {
-        theDest = GameObject.FindWithTag("Dest").transform;
+        theDest = GameObject.FindWithTag("Dest").transform;      
     }
 
     private void Update()
@@ -51,11 +53,13 @@ public class PickUp : MonoBehaviour
 
         else if (Input.GetMouseButtonDown(0) && isPickedUp == true)
         {
+            
             Debug.Log("pickup");
             throwAble.transform.parent = null;
             isPickedUp = false;
             throwAble.GetComponent<Rigidbody>().isKinematic = false;
-            throwAble.GetComponent<Rigidbody>().AddForce(Camera.transform.forward * force, ForceMode.Impulse);
+            playerVelocity = player.GetComponent<CharacterController>().velocity.x;
+            throwAble.GetComponent<Rigidbody>().AddForce(Camera.transform.forward * force * playerVelocity, ForceMode.Impulse);
         }
     }
 }
