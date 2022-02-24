@@ -7,7 +7,11 @@ public class CharacterMovement : MonoBehaviour
     //Moving
     public CharacterController controller;
 
-    public float speed = 12f;
+    public float maxSpeed = 12f;
+    public float minSpeed = 0;
+    public float strifeSpeed = 5;
+    public float backwardsSpeed = 3;
+    public float velocitySpeed;
     public float gravity = -9.81f;
 
     public Vector3 velocity;
@@ -45,6 +49,7 @@ public class CharacterMovement : MonoBehaviour
     void Start()
     {
         controller = GetComponent<CharacterController>();
+        velocitySpeed = minSpeed;
     }
 
     // Update is called once per frame
@@ -56,12 +61,36 @@ public class CharacterMovement : MonoBehaviour
 
     public void PlayerMovement()
     {
-        //Moves Player--------------------------------
+        //sets controls
         float x = Input.GetAxis("Horizontal");
         float z = Input.GetAxis("Vertical");
         Vector3 move = transform.right * x + transform.forward * z;
 
-        controller.Move(move * speed * Time.deltaTime);
+        //velocity
+        if (z > 0)
+        {
+            
+            velocitySpeed = Mathf.Lerp(velocitySpeed, maxSpeed, Time.deltaTime);
+        }
+
+        else
+        {
+            velocitySpeed = velocitySpeed - 30 * Time.deltaTime;
+            if(velocitySpeed < minSpeed)
+            {
+                velocitySpeed = minSpeed;
+            }
+        }
+        //---------------------------------------------
+
+        //Foward
+        if (z > 0) controller.Move(move * velocitySpeed * Time.deltaTime);  
+        
+        //Strife
+        else if (x > 0 || x < 0) controller.Move(move * strifeSpeed * Time.deltaTime);
+
+        //backwards
+        else if (z < 0) controller.Move(move * backwardsSpeed * Time.deltaTime);
 
         //Gives the player gravity---------------------
         velocity.y += gravity * Time.deltaTime;

@@ -4,11 +4,12 @@ public class PickUp : MonoBehaviour
 {
     // initilize destination
     private Transform theDest;
-    private float playerVelocity;
+    
 
     public GameObject throwAble;
     public GameObject Camera;
     public GameObject player;
+    public CharacterMovement playerMovement;
 
     public float force;
 
@@ -27,6 +28,8 @@ public class PickUp : MonoBehaviour
 
     private void Update()
     {
+        playerMovement.GetComponent<CharacterMovement>();
+
         //Check if looking at ball
         RaycastHit hit;
         if (Physics.Raycast(transform.position, transform.TransformDirection(Vector3.forward), out hit, pickUpDistance, pickUpMask))
@@ -39,6 +42,7 @@ public class PickUp : MonoBehaviour
         {
             Debug.DrawRay(transform.position, transform.TransformDirection(Vector3.forward) * pickUpDistance, Color.green);
             canPickUp = false;
+            
         }
 
         //Pick up ball
@@ -58,8 +62,10 @@ public class PickUp : MonoBehaviour
             throwAble.transform.parent = null;
             isPickedUp = false;
             throwAble.GetComponent<Rigidbody>().isKinematic = false;
-            playerVelocity = player.GetComponent<CharacterController>().velocity.x;
-            throwAble.GetComponent<Rigidbody>().AddForce(Camera.transform.forward * force * playerVelocity, ForceMode.Impulse);
+           
+            
+            throwAble.GetComponent<Rigidbody>().AddForce(Camera.transform.forward * force * playerMovement.velocitySpeed / 2, ForceMode.Impulse);
+            Debug.Log(playerMovement.velocity);
         }
     }
 }
