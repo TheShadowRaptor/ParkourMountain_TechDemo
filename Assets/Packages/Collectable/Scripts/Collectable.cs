@@ -4,26 +4,21 @@ using UnityEngine;
 
 public class Collectable : MonoBehaviour
 {
-
     float collectedTime;
-    public float respawnTime;
+    float respawnTime;
 
-    bool collected = false;
+    protected bool collected = false;
 
     int rotate = 30;
-
-    public MeshRenderer renderer;
-    public BoxCollider b_Collider;
+  
     // Update is called once per frame
-    public void Start()
+    protected void GetObjectComponents(Renderer renderer, Collider collider)
     {
-        renderer.GetComponent<MeshRenderer>();
-        b_Collider.GetComponent<BoxCollider>();
-
-        
+        renderer.GetComponent<Renderer>();
+        collider.GetComponent<Collider>();
     }
 
-    public void Update()
+    protected void TimeToRespawn(Renderer renderer, Collider collider)
     {
         gameObject.transform.Rotate(Vector3.up * rotate * Time.deltaTime);
         
@@ -33,18 +28,18 @@ public class Collectable : MonoBehaviour
             if (timeSinceCollected >= respawnTime)
             {
                 renderer.enabled = true;
-                b_Collider.enabled = true;
+                collider.enabled = true;
             }
         }
     }
 
-    public void OnTriggerEnter(Collider other)
+    protected void ObjectCollected(Collider other, Renderer renderer, Collider collider)
     {
         if (other.gameObject.CompareTag("Player"))
         {
             collected = true;
             renderer.enabled = false;
-            b_Collider.enabled = false;
+            collider.enabled = false;
             collectedTime = Time.time;
         }
     }

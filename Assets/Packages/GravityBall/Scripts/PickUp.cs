@@ -18,7 +18,7 @@ public class PickUp : MonoBehaviour
     public LayerMask pickUpMask;
 
     public bool canPickUp = false;
-    public bool isPickedUp = false;
+    public bool isHolding = false;
 
     // Start is called before the first frame update
     void Start()
@@ -29,6 +29,7 @@ public class PickUp : MonoBehaviour
     private void Update()
     {
         playerMovement.GetComponent<CharacterMovement>();
+
 
         //Check if looking at ball
         RaycastHit hit;
@@ -48,22 +49,18 @@ public class PickUp : MonoBehaviour
         //Pick up ball
         if (Input.GetMouseButtonDown(0) && canPickUp == true)
         {
-            Debug.Log("pickup");
             throwAble.transform.position = theDest.position;
             throwAble.transform.parent = theDest;
-            isPickedUp = true;
             throwAble.GetComponent<Rigidbody>().isKinematic = true;
+            isHolding = true;
         }
 
-        else if (Input.GetMouseButtonDown(0) && isPickedUp == true)
-        {
-            
-            Debug.Log("pickup");
-            throwAble.transform.parent = null;
-            isPickedUp = false;
+        else if (Input.GetMouseButtonDown(0) && isHolding)
+        {           
+            transform.parent = null;
+            isHolding = false;
             throwAble.GetComponent<Rigidbody>().isKinematic = false;
-           
-            
+                      
             throwAble.GetComponent<Rigidbody>().AddForce(Camera.transform.forward * force * playerMovement.velocitySpeed / 2, ForceMode.Impulse);
             Debug.Log(playerMovement.velocity);
         }
