@@ -51,6 +51,7 @@ public class BallCollectable : Collectable
             if (pickUp.isHolding == true && Input.GetMouseButtonDown(0))
             {
                 ball.GetComponent<Rigidbody>().isKinematic = false;
+                pickUp.isHolding = false;
             }
         }      
     }

@@ -387,6 +387,17 @@ Transform:
   m_CorrespondingSourceObject: {fileID: 9186715984165763829, guid: b1c6a640668168f47ba72704280df9e2, type: 3}
   m_PrefabInstance: {fileID: 9186715984967850001}
   m_PrefabAsset: {fileID: 0}
+--- !u!114 &577767299 stripped
+MonoBehaviour:
+  m_CorrespondingSourceObject: {fileID: -3752241028220348451, guid: aba6cc44468b30046aac5ca80c84e542, type: 3}
+  m_PrefabInstance: {fileID: 4658661343149302183}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: e649b6a34257a724b8f76582a291ab14, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1001 &578652225
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -1000,7 +1011,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 8bd2b24f3a2836940a95e8e18269dffe, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  throwAble: {fileID: 0}
+  ball: {fileID: 577767299}
   Camera: {fileID: 774305921}
   player: {fileID: 1188684056}
   playerMovement: {fileID: 1188684057}
@@ -1010,7 +1021,7 @@ MonoBehaviour:
     serializedVersion: 2
     m_Bits: 128
   canPickUp: 0
-  isPickedUp: 0
+  isHolding: 0
 --- !u!1 &1574837563
 GameObject:
   m_ObjectHideFlags: 0
@@ -1793,7 +1804,11 @@ PrefabInstance:
     - target: {fileID: -3752241028220348451, guid: aba6cc44468b30046aac5ca80c84e542, type: 3}
       propertyPath: ball
       value: 
-      objectReference: {fileID: 0}
+      objectReference: {fileID: 4084613453312433772, guid: 1d0a598b258907a4c8e75bd5d2b62ef9, type: 3}
+    - target: {fileID: -3752241028220348451, guid: aba6cc44468b30046aac5ca80c84e542, type: 3}
+      propertyPath: pickUp
+      value: 
+      objectReference: {fileID: 1563899184}
     - target: {fileID: -3752241028220348451, guid: aba6cc44468b30046aac5ca80c84e542, type: 3}
       propertyPath: collider
       value: 
