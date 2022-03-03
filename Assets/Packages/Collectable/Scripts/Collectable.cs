@@ -7,7 +7,7 @@ public class Collectable : MonoBehaviour
     float collectedTime;
     float respawnTime;
 
-    protected bool collected = false;
+    [SerializeField] protected bool collected = false;
 
     int rotate = 30;
   

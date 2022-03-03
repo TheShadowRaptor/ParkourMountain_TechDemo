@@ -6,7 +6,7 @@ public class PickUp : MonoBehaviour
     private Transform theDest;
     
 
-    public BallCollectable ball;
+    public BallCollectable throwable;
     public GameObject Camera;
     public GameObject player;
     public CharacterMovement playerMovement;
@@ -24,7 +24,7 @@ public class PickUp : MonoBehaviour
     void Start()
     {
         theDest = GameObject.FindWithTag("Dest").transform;
-        ball.GetComponent<BallCollectable>();
+        throwable.GetComponent<BallCollectable>();
     }
 
     private void Update()
@@ -50,19 +50,19 @@ public class PickUp : MonoBehaviour
         //Pick up ball
         if (Input.GetMouseButtonDown(0) && canPickUp == true)
         {
-            ball.ball.transform.position = theDest.position;
-            ball.ball.transform.parent = theDest;
-            ball.ball.GetComponent<Rigidbody>().isKinematic = true;
+            throwable.ball.transform.position = theDest.position;
+            throwable.ball.transform.parent = theDest;
+            throwable.ball.GetComponent<Rigidbody>().isKinematic = true;
             isHolding = true;
         }
 
         else if (Input.GetMouseButtonDown(0) && isHolding)
         {           
-            ball.ball.transform.parent = null;
+            throwable.ball.transform.parent = null;
             isHolding = false;
-            ball.ball.GetComponent<Rigidbody>().isKinematic = false;
+            throwable.ball.GetComponent<Rigidbody>().isKinematic = false;
                       
-            ball.ball.GetComponent<Rigidbody>().AddForce(Camera.transform.forward * force * playerMovement.velocitySpeed / 2, ForceMode.Impulse);
+            throwable.ball.GetComponent<Rigidbody>().AddForce(Camera.transform.forward * force * playerMovement.velocitySpeed / 2, ForceMode.Impulse);
             Debug.Log(playerMovement.velocity);
         }
     }
