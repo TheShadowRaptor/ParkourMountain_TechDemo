@@ -53,10 +53,14 @@ public class CharacterMovement : MonoBehaviour
     }
 
     // Update is called once per frame
-    void Update()
+    private void Update()
     {
-        PlayerMovement();
         PlayerJump();
+    }
+
+    void FixedUpdate()
+    {
+        PlayerMovement();     
     }
 
     public void PlayerMovement()

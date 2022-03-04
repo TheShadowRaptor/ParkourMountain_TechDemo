@@ -10,7 +10,7 @@ public class BallCollectable : Collectable
 
     public GameObject ball;
 
-    public PickUp pickUp;
+    public PickUpBall pickUp;
 
     public Renderer ObjectRenderer;
     public Collider ObjectCollider;
@@ -75,17 +75,7 @@ public class BallCollectable : Collectable
             {                
                 ball.GetComponent<Rigidbody>().isKinematic = false;
                 pickUp.isHolding = false;
-            }
-
-            //Pick up ball
-            if (Input.GetMouseButtonDown(0) && pickUp.canPickUp == true)
-            {
-                ball.transform.position = theDest.position;
-                ball.transform.parent = theDest;
-                ball.GetComponent<Rigidbody>().isKinematic = true;
-                pickUp.isHolding = true;
-            }
-            
+            }           
         }      
     }
 

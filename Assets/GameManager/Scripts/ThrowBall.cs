@@ -6,7 +6,7 @@ public class ThrowBall : MonoBehaviour
 {
     public BallCollectable ballCollectable;
     public CharacterMovement playerMovement;
-    public PickUp pickUp;
+    public PickUpBall pickUp;
     public GameObject Camera;
     public float throwForce;
 
@@ -14,7 +14,7 @@ public class ThrowBall : MonoBehaviour
     void Start()
     {
         ballCollectable.GetComponent<BallCollectable>();
-        pickUp.GetComponent<PickUp>();
+        pickUp.GetComponent<PickUpBall>();
     }
 
     // Update is called once per frame
