@@ -4,11 +4,14 @@ using UnityEngine;
 
 public class BallCollectable : Collectable
 {  
-    Transform theDest;
     Color color;
 
+    public Transform theDest;
+
     public GameObject ball;
+
     public PickUp pickUp;
+
     public Renderer ObjectRenderer;
     public Collider ObjectCollider;
     public Material material;
@@ -73,10 +76,20 @@ public class BallCollectable : Collectable
                 ball.GetComponent<Rigidbody>().isKinematic = false;
                 pickUp.isHolding = false;
             }
+
+            //Pick up ball
+            if (Input.GetMouseButtonDown(0) && pickUp.canPickUp == true)
+            {
+                ball.transform.position = theDest.position;
+                ball.transform.parent = theDest;
+                ball.GetComponent<Rigidbody>().isKinematic = true;
+                pickUp.isHolding = true;
+            }
+            
         }      
     }
 
-    private void OnTriggerEnter(Collider other)
+    private void OnTriggerStay(Collider other)
     {
         ObjectCollected(other, ObjectRenderer, ObjectCollider);
     }

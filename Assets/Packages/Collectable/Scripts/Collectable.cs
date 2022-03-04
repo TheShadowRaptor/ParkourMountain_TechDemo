@@ -7,7 +7,7 @@ public class Collectable : MonoBehaviour
     float collectedTime;
     float respawnTime;
 
-    [SerializeField] protected bool collected = false;
+    public bool collected = false;
 
     int rotate = 30;
   
@@ -21,7 +21,7 @@ public class Collectable : MonoBehaviour
     /*protected void TimeToRespawn(Renderer renderer, Collider collider)
     {
         gameObject.transform.Rotate(Vector3.up * rotate * Time.deltaTime);
-
+        
         if (collected)
         {
             float timeSinceCollected = Time.time - collectedTime;
