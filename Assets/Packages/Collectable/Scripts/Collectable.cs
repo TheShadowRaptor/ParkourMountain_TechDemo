@@ -18,10 +18,10 @@ public class Collectable : MonoBehaviour
         collider.GetComponent<Collider>();
     }
 
-    protected void TimeToRespawn(Renderer renderer, Collider collider)
+    /*protected void TimeToRespawn(Renderer renderer, Collider collider)
     {
         gameObject.transform.Rotate(Vector3.up * rotate * Time.deltaTime);
-        
+
         if (collected)
         {
             float timeSinceCollected = Time.time - collectedTime;
@@ -31,16 +31,13 @@ public class Collectable : MonoBehaviour
                 collider.enabled = true;
             }
         }
-    }
+    }*/
 
     protected void ObjectCollected(Collider other, Renderer renderer, Collider collider)
     {
         if (other.gameObject.CompareTag("Player"))
         {
             collected = true;
-            renderer.enabled = false;
-            collider.enabled = false;
-            collectedTime = Time.time;
         }
     }
 }

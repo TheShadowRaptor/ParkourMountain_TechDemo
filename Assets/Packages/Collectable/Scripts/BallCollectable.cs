@@ -13,16 +13,19 @@ public class BallCollectable : Collectable
     public Collider ObjectCollider;
     public Material material;
 
+    public float alpha;
+
     public Collectable collectable;
 
-    bool objectOn = true;
+    bool objectActive;
+    bool ballSpawned;
     // Start is called before the first frame update
     void Start()
     {      
         theDest = GameObject.FindWithTag("Dest").transform;
         collectable.GetComponent<Collectable>();
         ObjectRenderer.GetComponent<Renderer>();
-        color.a = 2;
+        color = material.color;
         GetObjectComponents(ObjectRenderer, ObjectCollider);
     }
 
@@ -30,26 +33,43 @@ public class BallCollectable : Collectable
     void Update()
     {
         //object uncollectable if ball is present on scene
-        if (GameObject.Find("GravityBall(Clone)") != null)
+        if (GameObject.Find("GravityBall(Clone)") != null) 
         {
-            ChangeObjectsMaterial(material);
-            objectOn = false;
+            alpha = -1.5f;
+            ChangeObjectsMaterial(material, alpha);
+            objectActive = true;
+            collected = false;
+        }
+        else
+        {
+            alpha = 0.5f;
+            ChangeObjectsMaterial(material, alpha);                
+            objectActive = false;
         }
 
-        //collectable respawn
-        TimeToRespawn(ObjectRenderer, ObjectCollider);
+        /*//collectable respawn
+        TimeToRespawn(ObjectRenderer, ObjectCollider);*/
 
         //spawns ball on players hand
-        if (collected == true && objectOn)
-        {
-            ball = Instantiate(ball, new Vector3(0,0,0), Quaternion.identity) as GameObject;
+        if (collected == true && objectActive == false)
+        {           
+            //Instatiate Once
+            if (ballSpawned == false)
+            {
+                ball = Instantiate(ball, new Vector3(0, 0, 0), Quaternion.identity) as GameObject;
+            }           
+            else if (ballSpawned == true)
+            {
+                ball.SetActive(true);
+            }
             ball.GetComponent<Rigidbody>().isKinematic = true;
             ball.transform.position = theDest.position;
             ball.transform.parent = theDest;
+            ballSpawned = true;
             pickUp.isHolding = true;
 
             if (pickUp.isHolding == true && Input.GetMouseButtonDown(0))
-            {
+            {                
                 ball.GetComponent<Rigidbody>().isKinematic = false;
                 pickUp.isHolding = false;
             }
@@ -61,10 +81,10 @@ public class BallCollectable : Collectable
         ObjectCollected(other, ObjectRenderer, ObjectCollider);
     }
 
-    protected void ChangeObjectsMaterial(Material material)
+    protected void ChangeObjectsMaterial(Material material, float alpha)
     {
         color = material.color;
-        color.a = -1.5f;
+        color.a = alpha;
         material.color = color;
     }
 }
