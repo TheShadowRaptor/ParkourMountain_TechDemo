@@ -637,6 +637,17 @@ Transform:
   m_Father: {fileID: 1934632271}
   m_RootOrder: 1
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &807829447 stripped
+MonoBehaviour:
+  m_CorrespondingSourceObject: {fileID: 510074246632364482, guid: 9acc65deb081c90429de27fa327e464e, type: 3}
+  m_PrefabInstance: {fileID: 1958081651}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 9e6a9383a71b91249a036e90475a07c5, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1 &901866857
 GameObject:
   m_ObjectHideFlags: 0
@@ -1285,9 +1296,17 @@ PrefabInstance:
       value: 0.003304264
       objectReference: {fileID: 0}
     - target: {fileID: 9186715984165763825, guid: b1c6a640668168f47ba72704280df9e2, type: 3}
+      propertyPath: ball
+      value: 
+      objectReference: {fileID: 4084613453312433772, guid: 1d0a598b258907a4c8e75bd5d2b62ef9, type: 3}
+    - target: {fileID: 9186715984165763825, guid: b1c6a640668168f47ba72704280df9e2, type: 3}
       propertyPath: respawn
       value: 
-      objectReference: {fileID: 0}
+      objectReference: {fileID: 807829447}
+    - target: {fileID: 9186715984165763825, guid: b1c6a640668168f47ba72704280df9e2, type: 3}
+      propertyPath: ballCollectable
+      value: 
+      objectReference: {fileID: 577767299}
     - target: {fileID: 9186715984165763829, guid: b1c6a640668168f47ba72704280df9e2, type: 3}
       propertyPath: m_RootOrder
       value: 1
@@ -2076,9 +2095,17 @@ PrefabInstance:
       value: DeathBlock
       objectReference: {fileID: 0}
     - target: {fileID: 9186715984165763825, guid: b1c6a640668168f47ba72704280df9e2, type: 3}
+      propertyPath: ball
+      value: 
+      objectReference: {fileID: 4084613453312433772, guid: 1d0a598b258907a4c8e75bd5d2b62ef9, type: 3}
+    - target: {fileID: 9186715984165763825, guid: b1c6a640668168f47ba72704280df9e2, type: 3}
       propertyPath: respawn
       value: 
-      objectReference: {fileID: 0}
+      objectReference: {fileID: 807829447}
+    - target: {fileID: 9186715984165763825, guid: b1c6a640668168f47ba72704280df9e2, type: 3}
+      propertyPath: ballCollectable
+      value: 
+      objectReference: {fileID: 577767299}
     - target: {fileID: 9186715984165763829, guid: b1c6a640668168f47ba72704280df9e2, type: 3}
       propertyPath: m_RootOrder
       value: 0
