@@ -18,7 +18,7 @@ public class BallGravity : MonoBehaviour
     // Start is called before the first frame update
     void Start()
     {
-        rb.GetComponent<Rigidbody>();
+        
     }
 
     // Update is called once per frame
@@ -29,16 +29,8 @@ public class BallGravity : MonoBehaviour
         {
             velocity.y = -2f;
         }
-        if (pickUpBall.isHolding)
-        {
-            velocity.y = -2f;
-        }
 
         velocity.y += gravity * Time.deltaTime;
-        
-        if(pickUpBall.isHolding == false)
-        {
-            rb.AddForce(0, velocity.y, 0);
-        }        
+
     }
 }

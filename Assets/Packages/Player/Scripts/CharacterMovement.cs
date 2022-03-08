@@ -88,8 +88,9 @@ public class CharacterMovement : MonoBehaviour
         //---------------------------------------------
 
         //Foward
-        if (z > 0) controller.Move(move * velocitySpeed * Time.deltaTime);  
-        
+        if (z > 0) controller.Move(move * velocitySpeed * Time.deltaTime);
+        if (z > 0 && Input.GetKey("left shift")) controller.Move(move * velocitySpeed * 1.1f * Time.deltaTime);
+
         //Strife
         else if (x > 0 || x < 0) controller.Move(move * strifeSpeed * Time.deltaTime);
 
