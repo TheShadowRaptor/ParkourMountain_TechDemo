@@ -4,90 +4,50 @@ using UnityEngine;
 
 public class MovingPlatform : MonoBehaviour
 {
-    private float minHeight;
-    private float maxHeight;
-    private float minWidth;
-    private float maxWidth;
+    public GameObject player;
+    public BallCollectable ballCollectable;
+    public GameObject sphere;
 
-    private bool platformSwitch = true;
-    public bool isVertical;
-
-    public float travelHeight;
-    public float travelWidth;
+    public Transform target;
+    public Transform targetHolder;
     public float speed;
 
-    public GameObject player;
+    private Vector3 start;
+    private float step;
 
-   
     // Start is called before the first frame update
     void Start()
     {
-        minHeight = this.transform.position.y;
-        maxHeight = minHeight + travelHeight;
-
-        minWidth = this.transform.position.x;
-        maxWidth = minWidth + travelWidth;
+        start = transform.position;
+        targetHolder.position = target.position;
+        step = speed * Time.deltaTime;
     }
 
     // Update is called once per frame
     void Update()
     {
-        if (platformSwitch)
+        transform.position = Vector3.MoveTowards(transform.position, target.position, step);
+
+
+        if (Vector3.Distance(transform.position, target.position) < 0.001f)
         {
-            if(isVertical == true)
-            {
-                this.transform.Translate(Vector3.up * speed * Time.deltaTime);
-                if (this.transform.position.y >= maxHeight)
-                {
-                    platformSwitch = false;
-                }
-            }
-
-            else if(isVertical == false)
-            {
-                this.transform.Translate(Vector3.right * speed * Time.deltaTime);
-                if (this.transform.position.x >= maxWidth)
-                {
-                    platformSwitch = false;
-                }
-            }
-           
-        }
-
-        if (platformSwitch == false)
-        {
-            if (isVertical == true)
-            {
-                this.transform.Translate(Vector3.down * speed * Time.deltaTime);
-                if (this.transform.position.y <= minHeight)
-                {
-                    platformSwitch = true;
-                }
-            }
-
-            else if (isVertical == false)
-            {
-                this.transform.Translate(Vector3.left * speed * Time.deltaTime);
-                if (this.transform.position.x <= minWidth)
-                {
-                    platformSwitch = true;
-                }
-            }
-        }
-
-        Vector3 clampedPosition = this.transform.position;
-        if (this.transform.position.y < minHeight) clampedPosition.y = minHeight;
-        if (this.transform.position.y > maxHeight) clampedPosition.y = maxHeight;
-        if (this.transform.position.x < minWidth) clampedPosition.x = minWidth;
-        if (this.transform.position.x > maxWidth) clampedPosition.x = maxWidth;
-        this.transform.position = clampedPosition;
+            target.position = start;
+            start = targetHolder.position;
+            targetHolder.position = target.position;
+        }      
     }
 
-    private void OnTriggerEnter(Collider other)
+    private void OnTriggerStay(Collider other)
     {
+        Physics.autoSyncTransforms = true;
         if (other.gameObject.CompareTag("Player"))
         {
             player.transform.parent = transform;
+        }
+
+        if (other.gameObject.CompareTag("Ball"))
+        {
+            ballCollectable.ball.transform.parent = sphere.transform;
         }
     }
 
@@ -97,5 +57,11 @@ public class MovingPlatform : MonoBehaviour
         {
             player.transform.parent = null;
         }
+
+        if (other.gameObject.CompareTag("Ball"))
+        {
+            ballCollectable.ball.transform.parent = null;
+        }
     }
+
 }
