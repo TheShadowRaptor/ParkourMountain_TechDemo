@@ -2,13 +2,13 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class DoorTrigger : MonoBehaviour
+public class AutomaticDoorTrigger : MonoBehaviour
 {
-    public Door door;    
+    public AutomaticDoor door;    
 
     private void Start()
     {
-        door.GetComponent<Door>();       
+        door.GetComponent<AutomaticDoor>();       
     }
 
     private void OnTriggerEnter(Collider other)

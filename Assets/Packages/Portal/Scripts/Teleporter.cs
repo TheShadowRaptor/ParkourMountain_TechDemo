@@ -4,15 +4,23 @@ using UnityEngine;
 
 public class Teleporter : MonoBehaviour
 {
-    // Start is called before the first frame update
-    void Start()
-    {
-        
-    }
+    public GameObject dest;
+    public GameObject player;
+    public BallCollectable ballCollectable;
+    public CharacterController controller;
 
-    // Update is called once per frame
-    void Update()
+    private void OnTriggerEnter(Collider other)
     {
-        
+        if (other.gameObject.CompareTag("Player"))
+        {
+            controller.enabled = false;
+            player.transform.position = dest.transform.position;
+            controller.enabled = true;
+        }
+
+        if (other.gameObject.CompareTag("Ball"))
+        {
+            ballCollectable.ball.transform.position = dest.transform.position;
+        }
     }
 }
