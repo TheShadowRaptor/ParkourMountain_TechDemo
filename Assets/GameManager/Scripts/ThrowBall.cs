@@ -4,6 +4,7 @@ using UnityEngine;
 
 public class ThrowBall : MonoBehaviour
 {
+    public AudioSource throwSound;
     public BallCollectable ballCollectable;
     public CharacterMovement playerMovement;
     public PickUpBall pickUp;
@@ -22,6 +23,7 @@ public class ThrowBall : MonoBehaviour
     {
         if (Input.GetMouseButtonDown(0) && pickUp.isHolding)
         {
+            throwSound.Play();
             ballCollectable.ball.transform.parent = null;
             pickUp.isHolding = false;
             ballCollectable.ball.GetComponent<Rigidbody>().isKinematic = false;

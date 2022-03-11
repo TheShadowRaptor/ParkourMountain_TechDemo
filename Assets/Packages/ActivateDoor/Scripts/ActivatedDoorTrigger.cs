@@ -6,6 +6,7 @@ public class ActivatedDoorTrigger : MonoBehaviour
 {
     public ActivatedDoor door;
     public Material buttonOff;
+    public AudioSource button;
 
     private bool hitOnce = false;
     // Start is called before the first frame update
@@ -22,6 +23,7 @@ public class ActivatedDoorTrigger : MonoBehaviour
             door.isOpen = true;
             door.playSound = true;
             this.GetComponent<Renderer>().material = buttonOff;
+            button.Play();
             hitOnce = true;
         }
     }

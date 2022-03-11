@@ -3,8 +3,11 @@ using UnityEngine;
 public class PickUpBall : MonoBehaviour
 {
     //initilize destination
-    private Transform theDest; 
-    
+    private Transform theDest;
+
+    //Sounds
+    public AudioSource catchSound;
+
     //Gameobjects
     public GameObject player;
     public GameObject pickUpCheck;
@@ -45,6 +48,7 @@ public class PickUpBall : MonoBehaviour
         //Pick up ball
         if (Input.GetMouseButtonDown(0) && canPickUp == true)
         {
+            catchSound.Play();
             ballCollectable.ball.transform.position = theDest.position;
             ballCollectable.ball.transform.parent = theDest;
             ballCollectable.ball.GetComponent<Rigidbody>().isKinematic = true;

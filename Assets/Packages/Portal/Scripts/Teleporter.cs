@@ -8,6 +8,7 @@ public class Teleporter : MonoBehaviour
     public GameObject player;
     public BallCollectable ballCollectable;
     public CharacterController controller;
+    public AudioSource warp;
 
     private void OnTriggerEnter(Collider other)
     {
@@ -16,6 +17,7 @@ public class Teleporter : MonoBehaviour
             controller.enabled = false;
             player.transform.position = dest.transform.position;
             controller.enabled = true;
+            warp.Play();
         }
 
         if (other.gameObject.CompareTag("Ball"))

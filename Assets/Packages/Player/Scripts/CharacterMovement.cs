@@ -4,6 +4,10 @@ using UnityEngine;
 
 public class CharacterMovement : MonoBehaviour
 {
+    //Sound
+    public AudioSource jumpSound;
+    public AudioSource wallJumpSound;
+
     //Moving
     public CharacterController controller;
 
@@ -31,11 +35,12 @@ public class CharacterMovement : MonoBehaviour
     public LayerMask wallOneMask;
     public LayerMask wallTwoMask;
 
-    //vault checking
+    /*//vault checking
     public Transform vaultCheck;
     public float vaultDistance = 0.4f;
-    public LayerMask vaultMask;
+    public LayerMask vaultMask;*/
 
+    //Bools
     private bool isGrounded;
     private bool canWallJumpOne;
     private bool canWallJumpTwo;
@@ -135,19 +140,25 @@ public class CharacterMovement : MonoBehaviour
         /*canVault = Physics.CheckSphere(vaultCheck.position, vaultDistance, vaultMask);*/
 
         //Jump Input
-        if (isGrounded && Input.GetButtonDown("Jump")) velocity.y = Mathf.Sqrt(jumpHeight * -1f * gravity);      
+        if (isGrounded && Input.GetButtonDown("Jump"))
+        {
+            velocity.y = Mathf.Sqrt(jumpHeight * -1f * gravity);
+            jumpSound.Play();
+        }
 
         //Wall Jump
         if (canWallJumpOne && Input.GetButtonDown("Jump") && oneTimeWallJumpOne == true)
         {
             velocity.y = Mathf.Sqrt(wallJumpHeight * -1f * gravity);
             oneTimeWallJumpOne = false;
+            wallJumpSound.Play();
         }
 
         if (canWallJumpTwo && Input.GetButtonDown("Jump") && oneTimeWallJumpTwo == true)
         {
             velocity.y = Mathf.Sqrt(wallJumpHeight * -1f * gravity);
             oneTimeWallJumpTwo = false;
+            wallJumpSound.Play();
         }
 
         /* //Vaulting

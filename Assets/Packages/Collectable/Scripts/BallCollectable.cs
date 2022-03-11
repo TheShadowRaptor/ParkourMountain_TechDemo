@@ -5,11 +5,10 @@ using UnityEngine;
 public class BallCollectable : Collectable
 {  
     Color color;
+    public AudioSource catchSound;
 
     public Transform theDest;
-
     public GameObject ball;
-
     public PickUpBall pickUp;
 
     public Renderer ObjectRenderer;
@@ -60,6 +59,7 @@ public class BallCollectable : Collectable
             if (ballSpawned == false)
             {
                 ball = Instantiate(ball, new Vector3(0, 0, 0), Quaternion.identity) as GameObject;
+                catchSound.Play();
             }           
             else if (ballSpawned == true)
             {

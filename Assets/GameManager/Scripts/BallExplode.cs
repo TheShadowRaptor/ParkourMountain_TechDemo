@@ -4,8 +4,10 @@ using UnityEngine;
 
 public class BallExplode : MonoBehaviour
 {
+    public AudioSource blowUpSound;
     public BallCollectable ballCollectable;
     public Collectable collectable;
+
     // Start is called before the first frame update
     void Start()
     {
@@ -20,9 +22,11 @@ public class BallExplode : MonoBehaviour
         {
             if (Input.GetMouseButtonDown(1))
             {
+                blowUpSound.Play();
                 ballCollectable.ball.SetActive(false);
                 collectable.collected = false;
-            }
+                
+            }   
         }
     }
 }
