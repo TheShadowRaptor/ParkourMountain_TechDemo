@@ -6,6 +6,7 @@ public class BallExplode : MonoBehaviour
 {
     public AudioSource blowUpSound;
     public BallCollectable ballCollectable;
+    public PickUpBall pickUpBall;
     public Collectable collectable;
 
     // Start is called before the first frame update
@@ -20,7 +21,7 @@ public class BallExplode : MonoBehaviour
     {
         if (ballCollectable.ball.transform.position != ballCollectable.theDest.position)
         {
-            if (Input.GetMouseButtonDown(1))
+            if (Input.GetMouseButtonDown(1) && pickUpBall.isHolding == false)
             {
                 blowUpSound.Play();
                 ballCollectable.ball.SetActive(false);
