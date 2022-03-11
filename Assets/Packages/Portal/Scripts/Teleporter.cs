@@ -7,6 +7,7 @@ public class Teleporter : MonoBehaviour
     public GameObject dest;
     public GameObject player;
     public BallCollectable ballCollectable;
+    public PickUpBall pickUpBall;
     public CharacterController controller;
     public AudioSource warp;
 
@@ -20,7 +21,7 @@ public class Teleporter : MonoBehaviour
             warp.Play();
         }
 
-        if (other.gameObject.CompareTag("Ball"))
+        if (other.gameObject.CompareTag("Ball") && pickUpBall.ballCollectable.theDest.transform.position != pickUpBall.ballCollectable.ball.transform.position)
         {
             ballCollectable.ball.transform.position = dest.transform.position;
         }

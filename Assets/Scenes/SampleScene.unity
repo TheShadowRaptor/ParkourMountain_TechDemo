@@ -2414,6 +2414,10 @@ PrefabInstance:
       value: 
       objectReference: {fileID: 1188684058}
     - target: {fileID: 802707707215759103, guid: 5df1b1c36ab676d4a9ed724b76f75c94, type: 3}
+      propertyPath: pickUpBall
+      value: 
+      objectReference: {fileID: 1822369696}
+    - target: {fileID: 802707707215759103, guid: 5df1b1c36ab676d4a9ed724b76f75c94, type: 3}
       propertyPath: ballCollectable
       value: 
       objectReference: {fileID: 577767299}
